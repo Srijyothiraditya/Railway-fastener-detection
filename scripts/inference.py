@@ -150,21 +150,21 @@ for i, img_path in enumerate(test_imgs):
     all_times.append(ms)
 
     img_cx  = result_img.shape[1] / 2
-dead    = result_img.shape[1] * 0.01
-left_f  = sum(1 for d in detections if d[0]==0 and (d[2]+d[4])/2 < img_cx - dead)
-right_f = sum(1 for d in detections if d[0]==0 and (d[2]+d[4])/2 > img_cx + dead)
-has_sleep = n_sleep > 0
-
-if has_sleep and left_f > 0 and right_f > 0:
-    cat = "✅ GOOD"
-elif has_sleep and (left_f > 0 or right_f > 0):
-    cat = "⚠️  WARNING"
-elif has_sleep:
-    cat = "🚨 CRITICAL"
-else:
-    cat = "❓ UNKNOWN"
-
-print(f"[{i+1:2d}/41] {img_path.name[:40]}  |  {ms:6.1f}ms  |  F:{n_fast} S:{n_sleep}  |  {cat}")
+    dead    = result_img.shape[1] * 0.01
+    left_f  = sum(1 for d in detections if d[0]==0 and (d[2]+d[4])/2 < img_cx - dead)
+    right_f = sum(1 for d in detections if d[0]==0 and (d[2]+d[4])/2 > img_cx + dead)
+    has_sleep = n_sleep > 0
+    
+    if has_sleep and left_f > 0 and right_f > 0:
+        cat = "✅ GOOD"
+    elif has_sleep and (left_f > 0 or right_f > 0):
+        cat = "⚠️  WARNING"
+    elif has_sleep:
+        cat = "🚨 CRITICAL"
+    else:
+        cat = "❓ UNKNOWN"
+    
+    print(f"[{i+1:2d}/41] {img_path.name[:40]}  |  {ms:6.1f}ms  |  F:{n_fast} S:{n_sleep}  |  {cat}")
 
 print()
 print("="*60)
